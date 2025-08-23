@@ -97,7 +97,7 @@ expense() async {
         }
 
         final url = Uri.parse(
-          'http://localhost:3000/expense/search?keyword=$keyword',
+          'http://localhost:3000/search/$keyword',
         );
         final response = await http.get(url);
 
