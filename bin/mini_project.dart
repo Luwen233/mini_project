@@ -96,9 +96,7 @@ expense() async {
           break;
         }
 
-        final url = Uri.parse(
-          'http://localhost:3000/search/$keyword',
-        );
+        final url = Uri.parse('http://localhost:3000/search/$keyword');
         final response = await http.get(url);
 
         if (response.statusCode == 200) {
