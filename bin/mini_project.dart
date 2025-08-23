@@ -88,17 +88,44 @@ expense() async {
         print('');
         break;
       case "3": //Search expense
-        
-        
+        stdout.write("Enter keyword to search: ");
+        String? keyword = stdin.readLineSync()?.trim();
+
+        if (keyword == null || keyword.isEmpty) {
+          print("Please enter a valid keyword.");
+          break;
+        }
+
+        final url = Uri.parse('http://localhost:3000/search/$keyword');
+        final response = await http.get(url);
+
+        if (response.statusCode == 200) {
+          final result = json.decode(response.body) as List;
+          if (result.isEmpty) {
+            print("No expenses found for keyword: $keyword");
+          } else {
+            int total = 0;
+            print("------------- Search results ----------");
+            for (var item in result) {
+              final dt = DateTime.parse(item['date']);
+              final dtLocal = dt.toLocal();
+              print(
+                "${item['id']}. ${item['item']} : ${item['paid']}฿ : ${dtLocal.toString()}",
+              );
+              total += item['paid'] as int;
+            }
+            print("Total expenses from search = $total฿");
+          }
+        } else {
+          print("Error: ${response.statusCode}");
+        }
         print('');
         break;
       case "4": //Add new expense
-        
 
         print('');
         break;
       case "5": //Delete an expense
-        
 
         print('');
         break;
