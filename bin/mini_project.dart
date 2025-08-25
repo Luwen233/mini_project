@@ -93,7 +93,20 @@ expense() async {
         print('');
         break;
       case "4": //Add new expense
-        
+        print("===== Add new item =====");
+        stdout.write('Item: ');
+        String? item = stdin.readLineSync()?.trim();
+        stdout.write('Paid: ');
+        String? paid = stdin.readLineSync()?.trim();
+        final body = {"id": id, "item": item, "paid": paid};
+        final url = Uri.parse('http://localhost:3000/add');
+        final response = await http.post(url, body: body);
+        if (response.statusCode == 200) {
+          final data = response.body;
+          print(data);
+        } else {
+          print("Error: ${response.statusCode}");
+        }
 
         print('');
         break;
