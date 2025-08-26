@@ -112,8 +112,6 @@ expense() async {
         print('');
         break;
 
-        print('');
-        break;
       case "6": //Exit
         print("------- Bye -------");
         return false;
