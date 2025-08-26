@@ -88,17 +88,29 @@ expense() async {
         print('');
         break;
       case "3": //Search expense
-        
-        
+
         print('');
         break;
       case "4": //Add new expense
-        
 
         print('');
         break;
       case "5": //Delete an expense
-        
+        print("===== Delete an item =====");
+        stdout.write('Item id: ');
+        String? itemid = stdin.readLineSync()?.trim();
+        final url = Uri.parse('http://localhost:3000/delete/$itemid');
+        final response = await http.delete(url);
+        if (response.statusCode == 200) {
+          final data = jsonDecode(response.body);
+          print(data);
+        } else if (response.statusCode == 404) {
+          print("Expense not found");
+        } else {
+          print("Error: ${response.statusCode} - ${response.body}");
+        }
+        print('');
+        break;
 
         print('');
         break;
