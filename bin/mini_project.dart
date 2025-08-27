@@ -96,6 +96,7 @@ expense() async {
         print('');
         break;
       case "5": //Delete an expense
+
         print("===== Delete an item =====");
         stdout.write('Item id: ');
         String? itemid = stdin.readLineSync()?.trim();
@@ -112,8 +113,6 @@ expense() async {
         print('');
         break;
 
-        print('');
-        break;
       case "6": //Exit
         print("------- Bye -------");
         return false;
